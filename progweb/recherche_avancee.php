@@ -101,6 +101,7 @@
     <?php 
     $recherche = strtolower($_POST['recherche']);
     $url = "https://data.enseignementsup-recherche.gouv.fr/api/records/1.0/search/?dataset=fr-esr-principaux-diplomes-et-formations-prepares-etablissements-publics&facet=etablissement_lib";
+    $url = $url."&refine.etablissement_lib=".$_POST['recherche'];
     if (isset($_POST['departement']) && ($_POST['departement'] != "- - -")){ //concatène le lien pour rechercher selon le département
 		$url = $url."&refine.dep_etab_lib=".$_POST['departement'];
 	}
@@ -118,22 +119,20 @@
 			$records = $record['facets'];
 		}
 	}
+    if ($records != NULL){
     echo "<table>";
     echo "<tr><th>Résultats des recherches</th></tr>";
     foreach($records as $record){
         $etablissement = strtolower($record['path']); //Fait la comparaison des string en miniscule pour éviter la casse
-        if (strpos($etablissement,$recherche) !== false){
         echo "<tr><td>";
         echo $record['path'];
         echo "</td></tr>";
         }
-        if($recherche == ""){
-		echo "<tr><td>";
-        echo $record['path'];
-        echo "</td></tr>";
-		}
-    }
     echo "</table>";
+    }
+    else{
+        echo "<h3>Aucun résultat</h3>";
+    }
       ?>
     </div>
         <div id="tabs-2">
@@ -150,14 +149,15 @@
             accessToken: 'pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw'
         }).addTo(mymap);
      <?php 
-     $secondURL = "https://data.enseignementsup-recherche.gouv.fr/api/records/1.0/search/?dataset=fr-esr-principaux-etablissements-enseignement-superieur&rows=10000&sort=uo_lib";
+     $secondURL = "https://data.enseignementsup-recherche.gouv.fr/api/records/1.0/search/?dataset=fr-esr-principaux-etablissements-enseignement-superieur&rows=323&sort=uo_lib";
      $string2 = file_get_contents($secondURL);
      $json2 = json_decode($string2,true);
      $records2 = $json2["records"];
      foreach($records as $record){ 
 		 foreach($records2 as $record2){
 			 $etablissement2 = strtolower($record2['fields']['uo_lib']);
-			 if (strtolower($record['path']) == $etablissement2 && strpos($etablissement2,$recherche)){
+             exit(strtolower($record['path']) ."==".$etablissement2 ." && ". (strpos($etablissement2,$recherche)) . "--" . $recherche);
+			 if (strtolower($record['path']) == $etablissement2 && (strpos($etablissement2,$recherche) !== false)){
 				 $tab = $record2['fields']['coordonnees'];
 				 echo "var marker = L.marker([".$tab[0].",".$tab[1]."]).addTo(mymap);";
 				 echo "marker.bindPopup(\"<b>".$record2['fields']['uo_lib']."</b></br>"."<a href=\\\"".$record2['fields']['url']."\\\">Lien vers le site de l'établissement</a>"."\").openPopup();"; 
