@@ -9,7 +9,7 @@ li {
   display: inline;
 
 }
-header{	/*Le header*/
+header{
     background-image:url("./CSS_Image/abstract-antique-backdrop-background.jpg");
     margin:0;
     color:white;
@@ -21,7 +21,6 @@ h2{
     margin:0;
 }
 
-/*CSS pour la liste déroulante*/
 ul {
   background-color: #8C8C8C;
   position: sticky;
@@ -64,31 +63,25 @@ line-height:2em;
 #mapid{
     height:500px;
 }
-
-/*CSS pour tout ce qui concerne les recherches*/
 #recherche{
     font:Arial, sans-serif;
     margin:1%;
 }
-
-
 p{
-margin:0; /*Pas d'espace entre les paragraphes*/
+margin:0;
 }
-/*CSS pour la barre de recherche*/
+
 #recherchetext{
 height:1em;
 padding:0;
 margin:0;
 }
 
-/*CSS pour le titre Recherche avancée*/
 #RechercheA{
-font-size:2em; 
+font-size:2em;
 text-align:center;
 }
 
-/*CSS pour le bloc contenant le filtre utilisée pour les recherches avancées*/
 #formulaireRechercheA{
     border:1px solid;
     text-align:center;
@@ -96,19 +89,22 @@ text-align:center;
     margin-left:20%;
     margin-right:20%;
 }
-/*CSS pour les boutons effacer et envoyer*/
+
 #boutonFormulaire{
     text-align:right;
     display:inline-bloc;
     margin-right:20%;
 }
 
-/*CSS attribue une taille fixe à la balise select (liste déroulante)*/
 #formulaireRechercheA select{
     width:200px;
  }
 
-/*CSS pour le tableau contenant les résultats des recherches*/
+#resultatRecherche{
+    border:1px solid;
+    padding:10px 10px;
+    border-spacing: 10px;
+}
 table {
 margin:auto;
 border: medium solid #000000;

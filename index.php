@@ -3,7 +3,7 @@
 
 <head >
     <title>
-        Page d'acceuil
+        Page d'accueil
     </title>
     <link rel="stylesheet" type="text/css" href="CSS/MEF.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin="" />
@@ -32,68 +32,7 @@
             </li>
         </ul>
     </nav>
-    <div id="recherche">
-        <p>
-            Recherche
-        </p>
-        <form action="recherche_avancee.php" method = "post" >
-            <input type="text" placeholder="..." size="40" id="recherchetext" name = "recherche"/>
-            <input type="submit" value="recherche">
-            <br/>
-         
-            <a href="#" id="liencachee"> recherche avanc&eacute;e</a> <!--L'id lien cachée va nous permettre de pouvoir créer un texte qui cache/montre le texte grâce à un script-->
-            <div id = "jsrecherche"> <!--L'id jsrecherche va nous permettre de pouvoir créer un texte qui cache/montre le texte grâce à un script-->
-                <div id="formulaireRechercheA">
-					
-                    Département
-                    <select name="departement" size="1">
-                        <option>- - -</option>
-
-                        <?php
-    $url = "https://data.enseignementsup-recherche.gouv.fr/api/records/1.0/search/?dataset=fr-esr-principaux-diplomes-et-formations-prepares-etablissements-publics&rows=0&sort=-rentree_lib&facet=dep_etab_lib&refine.rentree_lib=2017-18";
-    $string = file_get_contents($url); //On obtient le contenu du fichier grâce à l'url
-    $json = json_decode($string,true); //En utlisant la fonction json_decode() nous obtenons un tableau
-    $facets = $json["facet_groups"][0]["facets"]; // Navigation dans le tableau
-    foreach ($facets as $facet) {
-        echo "<option value = \"".$facet['path']."\">".$facet['path']."</option>";
-    }
-    ?>
-
-                    </select>
-
-                    Diplome
-                    <select name="diplome" size="1">
-                        <option>- - -</option>
-                        <?php
-    $url = "https://data.enseignementsup-recherche.gouv.fr/api/records/1.0/search/?dataset=fr-esr-principaux-diplomes-et-formations-prepares-etablissements-publics&rows=0&sort=-rentree_lib&facet=diplome_lib&refine.rentree_lib=2017-18";
-    $string = file_get_contents($url);
-    $json = json_decode($string,true);
-    $facets = $json["facet_groups"][0]["facets"];
-    foreach ($facets as $facet) {
-        echo "<option value = \"".$facet['path']."\">".$facet['path']."</option>";
-    }
-    ?>
-                    </select>
-                    Discipline
-                    <select name="discipline" size="1">
-                        <option>- - -</option>
-                                              <?php
-    $url = "https://data.enseignementsup-recherche.gouv.fr/api/records/1.0/search/?dataset=fr-esr-principaux-diplomes-et-formations-prepares-etablissements-publics&rows=0&facet=sect_disciplinaire_lib";
-    $string = file_get_contents($url);
-    $json = json_decode($string,true);
-    $facets = $json["facet_groups"][0]["facets"];
-    foreach ($facets as $facet) {
-        echo "<option value = \"".$facet['path']."\">".$facet['path']."</option>";
-    }
-    ?>
-                    </select>
-                </div>
-                <div id="boutonFormulaire">
-                    <input type="reset">
-                </div>
-                </div>
-            </form>
-    </div>
+ <?php include("filtre.php");?>
     <div id="tabs">
         <ul>
             <li><a href="#tabs-1">Carte des Universités</a></li>
@@ -118,7 +57,7 @@
         $("#jsrecherche").toggle();
     });
 </script>
-    <footer>Mu Davy</footer>
+    <div id ="footer">Mu Davy</div>
 </body>
 
 </html>
