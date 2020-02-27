@@ -17,14 +17,8 @@
                         <option>- - -</option>
 
                         <?php
-    $url = "https://data.enseignementsup-recherche.gouv.fr/api/records/1.0/search/?dataset=fr-esr-principaux-diplomes-et-formations-prepares-etablissements-publics&rows=0&sort=-rentree_lib&facet=dep_etab_lib&refine.rentree_lib=2017-18";
-    $url1 = 'base.json';
-    $string = file_get_contents($url1);
-    $json = json_decode($string);
-    var_dump($json);
-    echo $string;
-    $facets = jsonOpenFacets($url1,13);
-    var_dump($facets);
+    $url = "https://data.enseignementsup-recherche.gouv.fr/api/records/1.0/search/?dataset=fr-esr-principaux-diplomes-et-formations-prepares-etablissements-publics&rows=0&sort=-rentree_lib&facet=dep_etab_lib&refine.rentree_lib=2017-18&apikey=4b0b2503c3079e2d20a289f53ddbc2a50657de858963f0efff07d195";
+    $facets = jsonOpenFacets($url,0);
     foreach ($facets as $facet) {
         echo "<option value = \"".$facet['path']."\">".$facet['path']."</option>";
     }
@@ -36,7 +30,7 @@
                     <select name="diplome" size="1">
                         <option>- - -</option>
                         <?php
-    $url = "https://data.enseignementsup-recherche.gouv.fr/api/records/1.0/search/?dataset=fr-esr-principaux-diplomes-et-formations-prepares-etablissements-publics&rows=0&sort=-rentree_lib&facet=diplome_lib&refine.rentree_lib=2017-18";
+    $url = "https://data.enseignementsup-recherche.gouv.fr/api/records/1.0/search/?dataset=fr-esr-principaux-diplomes-et-formations-prepares-etablissements-publics&rows=0&sort=-rentree_lib&facet=diplome_lib&refine.rentree_lib=2017-18&apikey=4b0b2503c3079e2d20a289f53ddbc2a50657de858963f0efff07d195";
     $facets = jsonOpenFacets($url,0);
     foreach ($facets as $facet) {
         echo "<option value = \"".$facet['path']."\">".$facet['path']."</option>";
@@ -47,7 +41,7 @@
                     <select name="discipline" size="1">
                         <option>- - -</option>
                                               <?php
-    $url = "https://data.enseignementsup-recherche.gouv.fr/api/records/1.0/search/?dataset=fr-esr-principaux-diplomes-et-formations-prepares-etablissements-publics&rows=0&facet=sect_disciplinaire_lib";
+    $url = "https://data.enseignementsup-recherche.gouv.fr/api/records/1.0/search/?dataset=fr-esr-principaux-diplomes-et-formations-prepares-etablissements-publics&rows=0&facet=sect_disciplinaire_lib&apikey=4b0b2503c3079e2d20a289f53ddbc2a50657de858963f0efff07d195";
     $string = file_get_contents($url);
     $json = json_decode($string,true);
     $facets = $json["facet_groups"][0]["facets"];
