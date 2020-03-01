@@ -57,7 +57,7 @@
         $("#jsrecherche").toggle();
     });
 </script>
-    <div id ="footer">Mu Davy</div>
+<?php include("footer.html")?>
 </body>
 
 </html>

@@ -118,9 +118,28 @@ th {
 border: thin solid black;
 width: 100%;
 font-size:larger;
+height:30px;
 }
 td {
-border: thin solid black;
+border-top: thin solid black;
+border-bottom: thin solid black;
 width: 100%;
-font-size:smaller;
+font-size:medium;
+height:50px;
+}
+
+td:hover{
+background-color:#808080;
+color:white;
+}
+
+.submitLink {
+  background-color: transparent;
+  text-decoration: underline;
+  border: none;
+  color: blue;
+  cursor: pointer;
+}
+submitLink:focus {
+  outline: none;
 }

@@ -30,7 +30,7 @@
                     <select name="diplome" size="1">
                         <option>- - -</option>
                         <?php
-    $url = "https://data.enseignementsup-recherche.gouv.fr/api/records/1.0/search/?dataset=fr-esr-principaux-diplomes-et-formations-prepares-etablissements-publics&rows=0&sort=-rentree_lib&facet=diplome_lib&refine.rentree_lib=2017-18&apikey=4b0b2503c3079e2d20a289f53ddbc2a50657de858963f0efff07d195";
+    $url = "https://data.enseignementsup-recherche.gouv.fr/api/records/1.0/search/?dataset=fr-esr-principaux-diplomes-et-formations-prepares-etablissements-publics&sort=-rentree_lib&facet=diplome_lib&apikey=4b0b2503c3079e2d20a289f53ddbc2a50657de858963f0efff07d195";
     $facets = jsonOpenFacets($url,0);
     foreach ($facets as $facet) {
         echo "<option value = \"".$facet['path']."\">".$facet['path']."</option>";
