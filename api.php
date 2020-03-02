@@ -74,6 +74,9 @@ class api{
     }
     
     function initializeEtablissement($result,$dept,$discipline,$diplome){
+	ini_set('display_errors', 1);
+	ini_set('display_startup_errors', 1);
+	error_reporting(E_ALL);
 	require_once("connexion.php");
         $array = [];
         $recherche = strtolower($result);
@@ -106,11 +109,11 @@ class api{
             }
         }
         foreach($records as $record){
-        if (strpos(strtolower($record['path']),$recherche)!== false || ($this->filter == true && $this->compareStr($recherche,$record['path']))){
+   if ($this->compareStr(strtolower($recherche),$record['path'])!== false || ($this->filter == true && $this->compareStr($recherche,$record['path']))){
             $etablissement = strtolower($record['path']); //Fait la comparaison des string en miniscule pour éviter la casse
             $etab = new Etablissement();
             $etab->setName($record['path']);
-		$req = "Select * FROM Clic WHERE `nomEtab` ='".$record['path']."'";
+		$req = "Select * FROM Clic WHERE `nomEtab` =\"".$record['path']."\"";
 		$sql = $bdd->query($req);
 		$data = $sql->fetch();
 		if (!empty($data)){
